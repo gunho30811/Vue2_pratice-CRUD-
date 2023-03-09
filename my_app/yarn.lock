@@ -5976,7 +5976,7 @@
     "file-loader" "^6.2.0"
     "loader-utils" "^2.0.0"
 
-"vuetify@^1.3.0 || ^2.0.0", "vuetify@^2.6.0":
+"vuetify@^1.3.0 || ^2.0.0", "vuetify@^2.6.14":
   "integrity" "sha512-nr6wU3uTzhhEPssH23cW0Ee/hCrayp7cjl3nNjM2OmNwiJlV91tZiL1VO3597SqZyjh1xIa+m9J2rpKTSdIlrA=="
   "resolved" "https://registry.npmjs.org/vuetify/-/vuetify-2.6.14.tgz"
   "version" "2.6.14"
