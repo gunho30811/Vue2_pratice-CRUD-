@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container fluid>
-      <v-row justify="center" align="center">
+      <v-row justify="center" align-items="center">
         <v-col cols="12" sm="8" md="6" lg="4">
           <v-card>
             <v-toolbar color="primary" dark>
@@ -22,7 +22,7 @@
               <v-list>
                 <v-list-item-group>
                   <v-list-item
-                    v-for="(todo, index) in todos"
+                    v-for="(todo, index) in displayedTodos"
                     :key="index"
                   >
                     <v-list-item-action>
@@ -34,6 +34,7 @@
                     </v-list-item-action>
                     <v-list-item-content>
                       <v-list-item-title
+                      :to="{ name: 'todoDetail', params: { id: index } }"
                         :class="{ 'text-strike': todo.done }"
                       >{{ todo.text }}</v-list-item-title>
                     </v-list-item-content>
@@ -49,6 +50,12 @@
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
+              <v-pagination
+              v-model="page"
+                :length="Math.ceil(todos.length / perPage)"
+                :total-visible="5"
+                @input="paginate"
+              ></v-pagination>
             </v-card-text>
           </v-card>
         </v-col>
@@ -66,7 +73,10 @@ export default {
         { text: 'Learn Vue.js', done: false },
         { text: 'Learn Vuetify', done: false },
         { text: 'Build a Todo List', done: true }
-      ]
+      ],
+      itemsPerPageArray: [3, 6, 9],
+      currentPage: 1,
+      itemsPerPage: 3
     }
   },
   methods: {
@@ -84,6 +94,13 @@ export default {
     },
     clearCompleted() {
       this.todos = this.todos.filter(todo => !todo.done)
+    }
+  },
+  computed: {
+    displayedTodos() {
+      const start = (this.currentPage - 1) * this.itemsPerPage
+      const end = start + this.itemsPerPage
+      return this.todos.slice(start, end)
     }
   }
 }
